@@ -7,7 +7,7 @@
 <body>
   <h2></h2>
   <label for="n">Număr de dreptunghiuri (n): </label>
-  <input type="range" id="n" min="2" max="100" value="5" oninput="draw()">
+  <input type="range" id="n" min="2" max="100" value="5" step="2" oninput="draw()">
   <canvas id="canvas" width="600" height="400"></canvas>
 
   <script>
@@ -15,7 +15,7 @@
     const ctx = canvas.getContext("2d");
 
     function f(x) {
-      return Math.sin(x) + 2; // exemplu: f(x) = sin(x) + 2
+      return Math.sin(x) + 10;
     }
 
     function draw() {
@@ -69,4 +69,5 @@
   </script>
 </body>
 </html>
+
 
