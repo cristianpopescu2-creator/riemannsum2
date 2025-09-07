@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Suma Riemann</title>
+</head>
+<body>
+  <h2>Suma Riemann Interactivă</h2>
+  <label for="n">Număr de dreptunghiuri (n): </label>
+  <input type="range" id="n" min="2" max="100" value="5" oninput="draw()">
+  <canvas id="canvas" width="600" height="400"></canvas>
+
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+
+    function f(x) {
+      return Math.sin(x) + 2; // exemplu: f(x) = sin(x) + 2
+    }
+
+    function draw() {
+      const n = document.getElementById("n").value;
+      const a = 0, b = Math.PI;
+      const dx = (b - a) / n;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Axele
+      ctx.beginPath();
+      ctx.moveTo(40, 350);
+      ctx.lineTo(560, 350);
+      ctx.moveTo(40, 350);
+      ctx.lineTo(40, 50);
+      ctx.strokeStyle = "black";
+      ctx.stroke();
+
+      // Graficul functiei
+      ctx.beginPath();
+      for (let x = a; x <= b; x += 0.01) {
+        let y = f(x);
+        let px = 40 + (x / (b - a)) * 500;
+        let py = 350 - y * 50;
+        if (x === a) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+      }
+      ctx.strokeStyle = "blue";
+      ctx.stroke();
+
+      // Dreptunghiurile
+      for (let i = 0; i < n; i++) {
+        let xi = a + i * dx;
+        let yi = f(xi);
+        let px = 40 + (xi / (b - a)) * 500;
+        let py = 350 - yi * 50;
+        let rectWidth = (dx / (b - a)) * 500;
+        let rectHeight = yi * 50;
+
+        // Umplere roșie semi-transparentă
+        ctx.fillStyle = "rgba(255,0,0,0.3)";
+        ctx.fillRect(px, py, rectWidth, rectHeight);
+
+        // Contur negru
+        ctx.strokeStyle = "black";
+        ctx.strokeRect(px, py, rectWidth, rectHeight);
+      }
+    }
+
+    draw();
+  </script>
+</body>
+</html>
