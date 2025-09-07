@@ -5,9 +5,10 @@
   <title>Suma Riemann</title>
 </head>
 <body>
-  <h2></h2>
+  <h2>Suma Riemann Interactivă</h2>
   <label for="n">Număr de dreptunghiuri (n): </label>
-  <input type="range" id="n" min="2" max="50" value="5" step="2" oninput="draw()">
+  <span id="nValue">5</span>
+  <input type="range" id="n" min="2" max="100" value="5" oninput="draw()">
   <canvas id="canvas" width="600" height="400"></canvas>
 
   <script>
@@ -15,11 +16,13 @@
     const ctx = canvas.getContext("2d");
 
     function f(x) {
-      return Math.sin(x) + 2;
+      return Math.sin(x) + 2; // exemplu: f(x) = sin(x) + 2
     }
 
     function draw() {
       const n = document.getElementById("n").value;
+      document.getElementById("nValue").textContent = n; // afișăm valoarea curentă
+
       const a = 0, b = Math.PI;
       const dx = (b - a) / n;
 
@@ -69,8 +72,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
